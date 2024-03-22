@@ -22,8 +22,12 @@
 
   <!-- Bootstrap css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
   <!-- icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+  {{-- links --}}
+  @yield('links')
 
   <!-- Customm css -->
   <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -37,7 +41,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="#" class="logo d-flex align-items-center">
         <img src="{{asset('admin/assets/img/logo.png')}}" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">Blogs</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -266,13 +270,13 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -293,14 +297,14 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Icons Nav -->
+      </li><!-- End Icons Nav --> --}}
 
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link "  href="#" >
+        <a class="nav-link "  href="{{route('posts.create')}}" >
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span>Posts</span>
         </a>
       </li><!-- End Profile Page Nav -->
 

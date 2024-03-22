@@ -56,7 +56,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="#" class="logo d-flex align-items-center w-auto">
                   <img src="{{asset('admin/assets/img/logo.png')}}" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">Blogs</span>
                 </a>
               </div><!-- End Logo -->
 
