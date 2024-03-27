@@ -1,8 +1,11 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div>
-        <a href="{{ route('posts.create') }}" class="btn btn-success">Add Post</a>
+    <div class="bg-white p-4">
+        <div class="d-flex align-items-center justify-content-between">
+            <h2 class="fs-5 mb-3 fw-bold">Posts</h2>
+            <a href="{{ route('posts.create') }}" class="text-success  fs-4"><i class="fa-solid fa-circle-plus"></i></a>
+        </div>
         <table class="table mt-4 pa-2">
             <thead>
                 <tr>
@@ -50,7 +53,9 @@
                         </tr>
                     @endforeach
                 @else
-                    <p>No post found</p>
+                <tr>
+                    <td colspan="20" class="text-center">No data to display</td>
+                </tr>
                 @endif
             </tbody>
         </table>

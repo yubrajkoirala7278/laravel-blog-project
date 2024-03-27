@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="bg-white p-4">
-        <h2 class="fs-6">View Post</h2>
+        <h2 class="fs-5 fw-bold mb-3">View Post</h2>
         <table class="table table-bordered table-striped">
             <tbody>
                 <tr>

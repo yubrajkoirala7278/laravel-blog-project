@@ -295,21 +295,26 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('admin.dashboard') }}">
-                    <i class="bi bi-grid"></i>
+                    <i class="fa-solid fa-gauge-high"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="{{ route('posts.index') }}">
-                    <i class="bi bi-person"></i>
+                    <i class="fa-solid fa-user"></i>
                     <span>Posts</span>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a class="nav-link collapsed" href="{{route('category.index')}}">
+                    <i class="fa-solid fa-list"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="{{ route('logout') }}">
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
             </li>

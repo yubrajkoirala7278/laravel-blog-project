@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-white p-4">
-        <h2 class="fs-5 mb-4">Create Post</h2>
+        <h2 class="fs-5 mb-4 fw-bold">Create Post</h2>
         <form action="{{ route('posts.store') }}" method="POST">
             @csrf
             {{-- title --}}

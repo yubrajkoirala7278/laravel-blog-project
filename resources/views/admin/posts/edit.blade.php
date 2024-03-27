@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-white p-4">
-        <h2 class="fs-5 mb-4">Create Post</h2>
+        <h2 class="fs-5 mb-4">Edit Post</h2>
         <form action="{{ route('posts.update', $post->id) }}" method="POST">
             @csrf
             @method('PUT')
