@@ -2,8 +2,8 @@
 @section('content')
     <div class="bg-white p-4">
         <div class="d-flex align-items-center justify-content-between">
-            <h2 class="fs-5 mb-3 fw-bold">Categories</h2>
-            <a href="{{route('category.create')}}" class="text-success  fs-4"><i class="fa-solid fa-circle-plus"></i></a>
+            <h2 class="fs-5 mb-3 fw-bold">Tags</h2>
+            <a href="{{route('tag.create')}}" class="text-success  fs-4"><i class="fa-solid fa-circle-plus"></i></a>
         </div>
         <table class="table">
             <thead>
@@ -14,15 +14,15 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($categories) > 0)
-                    @foreach ($categories as $key => $category)
+                @if (count($tags) > 0)
+                    @foreach ($tags as $key => $tag)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category }}</td>
+                            <td>{{ $tag->tag }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <a href="{{route('category.edit',$category->id)}}" class="text-warning"><i class="fa-solid fa-pencil"></i></a>
-                                    <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                    <a href="{{route('tag.edit',$tag->id)}}" class="text-warning"><i class="fa-solid fa-pencil"></i></a>
+                                    <form action="{{ route('tag.destroy', $tag->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent text-danger show-alert-delete-box"><i

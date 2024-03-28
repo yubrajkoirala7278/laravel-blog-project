@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try{
-            $this->categoryService->addService($request->validated());
+            $this->categoryService->addService($request->except('_token'));
             return redirect()->route('category.index')->with('success','Category added successfully');
         }catch(\Throwable $th){
             return back()->with('error',$th->getMessage());
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         try{
-            $this->categoryService->updateService($request->validated(),$category);
+            $this->categoryService->updateService($request->except('_token','_method'),$category);
             return redirect()->route('category.index')->with('success','Category updated successfully');
         }catch(\Throwable $th){
             return back()->with('error',$th->getMessage());

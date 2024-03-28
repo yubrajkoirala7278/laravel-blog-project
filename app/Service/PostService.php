@@ -28,9 +28,9 @@ class PostService
     // =====================================
 
     // ==============GET All==================
-    public function fetchPost()
+    public function fetchPost($with = [])
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->with($with)->get();
         return $posts;
     }
     // =======================================

@@ -23,7 +23,7 @@ class PostController extends Controller
     public function index()
     {
         try {
-            $posts = $this->postService->fetchPost();
+            $posts = $this->postService->fetchPost(['category','tags']);
             $tags = Tag::all();
             return view('admin.posts.index', compact('posts','tags'));
         } catch (\Throwable $th) {

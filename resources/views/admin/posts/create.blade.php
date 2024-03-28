@@ -41,7 +41,7 @@
                     <option selected disabled value="">Choose Category</option>
                     @if (count($categories) > 0)
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->category }}</option>
                         @endforeach
                     @endif
                 </select>
@@ -55,7 +55,7 @@
                 <select class="form-select" id="select-tags" data-placeholder="Choose Tags" multiple name="tags[]">
                     @if (count($tags) > 0)
                         @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
                         @endforeach
                     @endif
                 </select>

@@ -8,9 +8,7 @@ class CategoryService{
 
     // ========POST========
     public function addService($request){
-       Category::create([
-        'name'=>$request['category']
-       ]);
+       Category::create($request);
     }
 
     // =======DELETE==========
@@ -20,8 +18,6 @@ class CategoryService{
 
     // =======UPDATE===========
     public function updateService($request,$category){
-        $category->update([
-            'name'=>$request['category']
-        ]);
+        $category->update($request);
     }
 }

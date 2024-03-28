@@ -313,6 +313,12 @@
                 </a>
             </li>
             <li class="nav-item ">
+                <a class="nav-link collapsed" href="{{route('tag.index')}}">
+                    <i class="fa-solid fa-list"></i>
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link collapsed" href="{{ route('logout') }}">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Logout</span>

@@ -26,13 +26,13 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ Str::limit($post->description, 15) }}</td>
-                            <td>{{ $post->category->name }}</td>
+                            <td>{{ !empty($post->category) ? $post->category->category : '' }}</td>
                             <td>{{ $post->user->name }}</td>
                             <td>{{ $post->status == 1 ? 'Active' : 'Inactive' }}</td>
                             <td>
                                 @if (count($tags) > 0)
                                     @foreach ($tags as $tag)
-                                        {{ $post->tags->contains($tag->id) ? $tag->name.',' : '' }}
+                                        {{ $post->tags->contains($tag->id) ? $tag->tag.',' : '' }}
                                     @endforeach
                                 @endif
         
