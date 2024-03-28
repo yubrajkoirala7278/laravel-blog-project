@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-white p-4">
         <h2 class="fs-5 mb-4 fw-bold">Create Post</h2>
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- title --}}
             <div class="mb-3">
@@ -47,6 +47,14 @@
                 </select>
                 @if ($errors->has('category'))
                     <span class="text-danger text-sm">{{ $errors->first('category') }}</span>
+                @endif
+            </div>
+            {{-- image --}}
+            <div class="mb-3">
+                <label for="filename" class="form-label">Image</label>
+                <input type="file" class="form-control" id="filename" name="filename">
+                @if ($errors->has('filename'))
+                    <span class="text-danger text-sm">{{ $errors->first('filename') }}</span>
                 @endif
             </div>
             {{-- Tags (dynamic multiple select) --}}

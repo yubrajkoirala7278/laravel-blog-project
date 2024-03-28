@@ -26,8 +26,10 @@ class PostRequest extends FormRequest
             'description'=>['required','string','max:3000'],
             'status'=>['required','integer','max:255'],
             'category'=>['required','integer','max:255'],
+            'filename' =>$this->isMethod('POST') ? ['required'] : ['nullable'],
+            'filename' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tags'=>['required','array'],
-            'tags.*'=>['required','string','max:255']
+            'tags.*'=>['required','string','max:255'],
         ];
     }
 }

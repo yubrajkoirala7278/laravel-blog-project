@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class PostService
 {
+    private $imageService;
+    public function __construct() {
+        $this->imageService = new ImageService();
+    }
 
     // ===========POST(Add)=================
     public function addService($request)
@@ -20,7 +24,10 @@ class PostService
                 'description' => $request['description'],
                 'status' => $request['status'],
             ]);
-
+            // if image exist
+            if (isset($request['filename'])) {
+                $this->imageService->saveImage($post, $request['filename'], 'post');
+            }
             // add data with many to many relation
             $post->tags()->attach($request['tags']);
         });
@@ -60,10 +67,14 @@ class PostService
     // ====================================
 
     // =============DELETE=================
-    public function deletePost($post){
+    public function deletePost($post)
+    {
+        if (!empty($post['filename'])) {
+            $this->imageService->deleteImage($post['filename']);
+        }
         //if not used cascadeOnDelete() then you should detach from many to many relation else you can directly use delete only
-        $post->tags()->detach();  
-       $post->delete();
+        $post->tags()->detach();
+        $post->delete();
     }
     // ====================================
 }
