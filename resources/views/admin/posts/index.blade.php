@@ -16,6 +16,7 @@
                     <th scope="col">Username</th>
                     <th scope="col">Status</th>
                     <th scope="col">Tags</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -24,25 +25,28 @@
                     @foreach ($posts as $key => $post)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $post->title }}</td>
+                            <td>{{ Str::limit($post->title, 15) }}</td>
                             <td>{{ Str::limit($post->description, 15) }}</td>
                             <td>{{ !empty($post->category) ? $post->category->category : '' }}</td>
                             <td>{{ $post->user->name }}</td>
                             <td>{{ $post->status == 1 ? 'Active' : 'Inactive' }}</td>
                             <td>
-                                @if (count($tags) > 0)
-                                    @foreach ($tags as $tag)
-                                        {{ $post->tags->contains($tag->id) ? $tag->tag.',' : '' }}
+                                @if (count($post->tags) > 0)
+                                    @foreach ($post->tags as $tag)
+                                        <p>{{  $tag->tag }}</p>
                                     @endforeach
                                 @endif
         
+                            </td>
+                            <td>
+                                <img src="{{asset('storage/images/post/'.$post->image->filename)}}" alt="" style="height: 20px">
                             </td>
                             <td>
                                 <div class="d-flex align-items-center" style="gap: 10px">
                                     <a href="{{route('posts.show',$post->id)}}" class="text-primary"><i class="fa-regular fa-eye"></i></a>
                                     <a href="{{ route('posts.edit', $post->id) }}" class="text-warning"><i
                                             class="fa-solid fa-pencil"></i></a>
-                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                    <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent text-danger p-0 show-alert-delete-box"><i

@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <th scope="col">Category</th>
-                    <td>{{ $post->category->name }}</td>
+                    <td>{{ $post->category->category }}</td>
                 </tr>
                 <tr>
                     <th scope="col">Username</th>
@@ -27,12 +27,18 @@
                 <tr>
                     <th scope="col">Tags</th>
                     <td>
-                        @if (count($tags) > 0)
-                            @foreach ($tags as $tag)
-                                {{ $post->tags->contains($tag->id) ? $tag->name.' | ' : '' }}
+                        @if (count($post->tags) > 0)
+                            @foreach ($post->tags as $tag)
+                                <p>{{ $tag->tag }}</p>
                             @endforeach
                         @endif
 
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Image</th>
+                    <td>
+                        <img src="{{asset('storage/images/post/'.$post->image->filename)}}" alt="" style="height: 50px">
                     </td>
                 </tr>
             </tbody>

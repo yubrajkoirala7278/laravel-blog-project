@@ -51,12 +51,13 @@
             </div>
             {{-- image --}}
             <div class="mb-3">
-                <label for="filename" class="form-label">Image</label>
-                <input type="file" class="form-control" id="filename" name="filename">
-                @if ($errors->has('filename'))
-                    <span class="text-danger text-sm">{{ $errors->first('filename') }}</span>
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" name="image">
+                @if ($errors->has('image'))
+                    <span class="text-danger">{{$errors->first('image')}}</span>
                 @endif
-            </div>
+                
+              </div>
             {{-- Tags (dynamic multiple select) --}}
             <div class="mb-3">
                 <label for="tags" class="form-label">Tags</label>

@@ -23,9 +23,8 @@ class PostController extends Controller
     public function index()
     {
         try {
-            $posts = $this->postService->fetchPost(['category','tags']);
-            $tags = Tag::all();
-            return view('admin.posts.index', compact('posts','tags'));
+            $posts = $this->postService->fetchPost();
+            return view('admin.posts.index', compact('posts'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
@@ -64,10 +63,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         try {
-            $categories = Category::all();
-            $tags = Tag::all();
             $post = $this->postService->view($post);
-            return view('admin.posts.show', compact('post','categories', 'tags'));
+            return view('admin.posts.show', compact('post'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
@@ -94,7 +91,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         try{
-            $this->postService->updateService($request->validated(),$post);
+            $this->postService->updateService($request,$post);
             return redirect()->route('posts.index')->with('success','post updated successfully!');
         }catch(\Throwable $th){
             return back()->with('error',$th->getMessage());

@@ -501,6 +501,8 @@
     font-weight: normal;
     font-size: 12px;
     padding: 3px 6px;
+    top: -3px;
+    right: -10px;
   }
   
   .header-nav .notifications {
