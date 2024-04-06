@@ -6,7 +6,8 @@
             <h2 class="fs-5 mb-3 fw-bold">Posts</h2>
             <a href="{{ route('posts.create') }}" class="text-success  fs-4"><i class="fa-solid fa-circle-plus"></i></a>
         </div>
-        <table class="table mt-4 pa-2">
+        <div class="table-post-data"> 
+            <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
@@ -21,10 +22,9 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($posts) > 0)
                     @foreach ($posts as $key => $post)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <th>{{ $key + 1 }}</th>
                             <td>{{ Str::limit($post->title, 15) }}</td>
                             <td>{{ Str::limit($post->description, 15) }}</td>
                             <td>{{ !empty($post->category) ? $post->category->category : '' }}</td>
@@ -56,15 +56,38 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
-                <tr>
-                    <td colspan="20" class="text-center">No data to display</td>
-                </tr>
-                @endif
             </tbody>
-        </table>
+            </table>
+            {!! $posts->links() !!}
+        </div>
     </div>
 @endsection
 
 @section('script')
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+<script type="text/javascript">
+     //pagination 
+    $(document).on('click','.pagination a', function(e){
+      e.preventDefault();
+      let page = $(this).attr('href').split('page=')[1]
+      record(page)
+    })
+
+    function record(page){
+        $.ajax({
+            url:"/admin/posts?page="+page,
+            success:function(res){
+                $('.table-post-data').html(res);
+            }
+        })
+    }
+
+</script> 
 @endsection

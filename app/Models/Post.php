@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable=['user_id','caregory_id','title','description','status'];
+    protected $fillable=['user_id','category_id','title','description','status'];
 
     //== many to many relationship==
     public function tags(){
@@ -17,7 +17,7 @@ class Post extends Model
     // ==============================
 
     public function category(){
-        return $this->belongsTo(Category::class,'caregory_id');
+        return $this->belongsTo(Category::class,'category_id');
     }
 
     public function user(){

@@ -20,10 +20,13 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             $posts = $this->postService->fetchPost();
+            if ($request->ajax()) {
+                return view('admin.posts.index', compact('posts'))->render();
+            }
             return view('admin.posts.index', compact('posts'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
@@ -79,7 +82,7 @@ class PostController extends Controller
             $categories = Category::all();
             $tags = Tag::all();
             $post = $this->postService->view($post);
-            return view('admin.posts.edit', compact('post','categories', 'tags'));
+            return view('admin.posts.edit', compact('post', 'categories', 'tags'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
@@ -90,11 +93,11 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        try{
-            $this->postService->updateService($request,$post);
-            return redirect()->route('posts.index')->with('success','post updated successfully!');
-        }catch(\Throwable $th){
-            return back()->with('error',$th->getMessage());
+        try {
+            $this->postService->updateService($request, $post);
+            return redirect()->route('posts.index')->with('success', 'post updated successfully!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -103,11 +106,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        try{
+        try {
             $this->postService->deletePost($post);
-            return back()->with('success','Post deleted successfully');
-        }catch(\Throwable $th){
-            return back()->with('error',$th->getMessage());
+            return back()->with('success', 'Post deleted successfully');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
         }
     }
 }

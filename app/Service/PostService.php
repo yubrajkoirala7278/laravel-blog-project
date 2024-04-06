@@ -19,7 +19,7 @@ class PostService
             // adding data in parent table
             $post = Post::create([
                 'user_id' => auth()->id(),
-                'caregory_id' => $request['category'],
+                'category_id' => $request['category'],
                 'title' => $request['title'],
                 'description' => $request['description'],                                                      
                 'status' => $request['status'],
@@ -37,7 +37,7 @@ class PostService
     // ==============GET All==================
     public function fetchPost()
     {
-        $posts = Post::latest()->with(['category','tags','image'])->get();
+        $posts = Post::latest()->with(['category','tags','image'])->paginate(3);
         return $posts;
     }
     // =======================================
@@ -60,7 +60,7 @@ class PostService
         // updating data in parent table
         $post->update([
             'user_id' => auth()->id(),
-            'caregory_id' => $request['category'],
+            'category_id' => $request['category'],
             'title' => $request['title'],
             'description' => $request['description'],
             'status' => $request['status'],

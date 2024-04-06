@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ReadmoreController;
 use Illuminate\Support\Facades\Route;
 
 // ============frontend================
 // home-page
 Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/read-more/{post}',[ReadmoreController::class,'index'])->name('frontend.read-more');
 
 
 // ============admin dashboard============

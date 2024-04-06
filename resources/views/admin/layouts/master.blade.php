@@ -13,9 +13,12 @@
   <link href="{{asset('favicon.png')}}" rel="icon">
   <link href="{{asset('favicon.png')}}" rel="apple-touch-icon">
 
+  {{-- csrf token --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  {{-- jquery --}}
+
   {{-- alerts --}}
   <script src="https://cdn.lordicon.com/lordicon.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -383,7 +386,6 @@
   @yield('script')
 
   {{-- multiple/combo select --}}
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

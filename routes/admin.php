@@ -16,4 +16,5 @@ Route::resources([
     'category'=>CategoryController::class,
     'tag'=>TagController::class
 ]);
+
 // ===============================
