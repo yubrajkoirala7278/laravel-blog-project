@@ -29,7 +29,7 @@
                                         <ul class="post-meta mb-2">
                                             <li>
                                                 @foreach ($posts[0]->tags as $post)
-                                                    <a href="#">{{ $post->tag }}</a>
+                                                    <a href="{{ route('frontend.read-more', $posts[0]->id) }}">{{ $post->tag }}</a>
                                                 @endforeach
 
                                             </li>
@@ -63,7 +63,7 @@
 
                                                 <li>
                                                     @foreach ($posts[$i]->tags as $post)
-                                                        <a href="#">{{ $post->tag }}</a>
+                                                        <a href="{{ route('frontend.read-more', $posts[$i]->id) }}">{{ $post->tag }}</a>
                                                     @endforeach
                                                 </li>
                                             </ul>
@@ -77,47 +77,7 @@
                                     </article>
                                 </div>
                             @endfor
-
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <nav class="mt-4">
-                                            <!-- pagination -->
-                                            <nav class="mb-md-50">
-                                                <ul class="pagination justify-content-center">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#!" aria-label="Pagination Arrow">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="26"
-                                                                height="26" fill="currentColor" viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
-                                                            </svg>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active "> <a href="index.html" class="page-link">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"> <a href="#!" class="page-link">
-                                                            2
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#!" aria-label="Pagination Arrow">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="26"
-                                                                height="26" fill="currentColor" viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
-                                                            </svg>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
+                            {{$posts->links()}}
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -144,7 +104,7 @@
                                         <div class="widget-body">
                                             <ul class="widget-list">
                                                 @foreach ($categories as $category)
-                                                    <li><a href="#!">{{ $category->category }}<span
+                                                    <li><a href="{{route('frontend.category',$category->id)}}">{{ $category->category }}<span
                                                                 class="ml-auto">({{ $category->posts_count }})</span></a>
                                                     </li>
                                                 @endforeach
@@ -158,7 +118,7 @@
                                         <div class="widget-body">
                                             <ul class="widget-list">
                                                 @foreach ($tags as $tag)
-                                                    <li><a href="#!">{{ $tag->tag }}<span
+                                                    <li><a href="{{route('frontend.tag',$tag)}}">{{ $tag->tag }}<span
                                                                 class="ml-auto">({{ $tag->posts_count }})</span></a>
                                                     </li>
                                                 @endforeach

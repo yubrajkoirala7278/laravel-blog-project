@@ -6,7 +6,6 @@
             <h2 class="fs-5 mb-3 fw-bold">Posts</h2>
             <a href="{{ route('posts.create') }}" class="text-success  fs-4"><i class="fa-solid fa-circle-plus"></i></a>
         </div>
-        <div class="table-post-data"> 
             <table class="table table-bordered">
             <thead>
                 <tr>
@@ -49,7 +48,7 @@
                                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent text-danger p-0 show-alert-delete-box"><i
+                                        <button type="submit" class="btn btn-transparent text-danger p-0 show-alert-delete-box" data-toggle="tooltip" title='Delete'><i
                                                 class="fa-regular fa-trash-can"></i></button>
                                     </form>
                                 </div>
@@ -59,35 +58,9 @@
             </tbody>
             </table>
             {!! $posts->links() !!}
-        </div>
     </div>
 @endsection
 
 @section('script')
 
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-</script>
-<script type="text/javascript">
-     //pagination 
-    $(document).on('click','.pagination a', function(e){
-      e.preventDefault();
-      let page = $(this).attr('href').split('page=')[1]
-      record(page)
-    })
-
-    function record(page){
-        $.ajax({
-            url:"/admin/posts?page="+page,
-            success:function(res){
-                $('.table-post-data').html(res);
-            }
-        })
-    }
-
-</script> 
 @endsection

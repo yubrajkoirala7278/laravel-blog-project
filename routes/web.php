@@ -1,14 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ReadmoreController;
+use App\Http\Controllers\Frontend\TagController;
 use Illuminate\Support\Facades\Route;
 
 // ============frontend================
 // home-page
-Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/',[HomeController::class,'index'])->name('frontend.index');
 Route::get('/read-more/{post}',[ReadmoreController::class,'index'])->name('frontend.read-more');
+Route::get('/category/{category}',[CategoryController::class,'index'])->name('frontend.category');
+Route::get('/tag/{tag}',[TagController::class,'index'])->name('frontend.tag');
 
 
 // ============admin dashboard============

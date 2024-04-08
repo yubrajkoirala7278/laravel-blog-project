@@ -24,9 +24,6 @@ class PostController extends Controller
     {
         try {
             $posts = $this->postService->fetchPost();
-            if ($request->ajax()) {
-                return view('admin.posts.index', compact('posts'))->render();
-            }
             return view('admin.posts.index', compact('posts'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());

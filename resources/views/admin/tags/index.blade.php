@@ -25,7 +25,7 @@
                                     <form action="{{ route('tag.destroy', $tag->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent text-danger show-alert-delete-box"><i
+                                        <button type="submit" class="btn btn-transparent text-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i
                                                 class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </div>

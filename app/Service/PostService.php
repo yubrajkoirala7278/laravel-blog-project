@@ -37,7 +37,7 @@ class PostService
     // ==============GET All==================
     public function fetchPost()
     {
-        $posts = Post::latest()->with(['category','tags','image'])->paginate(3);
+        $posts = Post::latest()->with(['category','tags','image'])->paginate(10);
         return $posts;
     }
     // =======================================

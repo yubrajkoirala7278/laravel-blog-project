@@ -10,19 +10,17 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $posts = Post::latest()->with(['category','tags','image'])->get();
-        // $posts = Post::latest()->with(['category','tags','image'])->paginate(5);
+    public function index()
+    {
+        // fetch post with category,tags and image relation
+        $posts = Post::latest()->with(['category', 'tags', 'image'])->paginate(10);
 
         // fetch categories with counts
-        $categories = Category::withCount('posts')->get();
-        // $categories=Category::all(); 
-        // $categories=Category::with('posts')->get();
+        $categories = Category::latest()->withCount('posts')->get();
 
-        $tags=Tag::withCount('posts')->get();
-        // $tags=Tag::all();
-        // $tags=Tag::with('posts')->get();
+        //    fetch all tags with counts
+        $tags = Tag::latest()->withCount('posts')->get();
 
-        return view('frontend.home.index',compact('posts','tags','categories'));
+        return view('frontend.home.index', compact('posts', 'tags', 'categories'));
     }
 }

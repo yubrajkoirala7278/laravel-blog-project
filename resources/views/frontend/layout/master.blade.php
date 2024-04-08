@@ -32,7 +32,7 @@
   <header class="navigation">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light px-0">
-        <a class="navbar-brand order-1 py-0" href="#">
+        <a class="navbar-brand order-1 py-0" href="{{route('frontend.index')}}">
           <img loading="prelaod" decoding="async" class="img-fluid" src="{{asset('frontend/images/logo.png')}}"
             alt="Reporter Hugo">
         </a>
@@ -52,9 +52,10 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Articles
               </a>
-              <div class="dropdown-menu"> <a class="dropdown-item" href="#">Travel</a>
-                <a class="dropdown-item" href="#">Lifestyle</a>
-                <a class="dropdown-item" href="#">Cruises</a>
+              <div class="dropdown-menu"> 
+                @foreach ($tags as $tag)
+                  <a class="dropdown-item" href="{{route('frontend.tag',$tag->id)}}">{{$tag->tag}}</a>
+                @endforeach
               </div>
             </li>
             <li class="nav-item"> <a class="nav-link" href="#">Contact</a>

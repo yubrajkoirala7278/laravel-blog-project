@@ -15,8 +15,10 @@
 
   {{-- csrf token --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  {{-- sweet alert --}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
   {{-- jquery --}}
-
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   {{-- alerts --}}
   <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
@@ -347,6 +349,29 @@
 
   {{-- toastify --}}
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '.show-alert-delete-box', function(event){
+            var form =  $(this).closest("form");
+
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to delete this record?",
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel","Yes!"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
   
 {{-- display success message --}}
   @if(session('success'))
@@ -384,6 +409,9 @@
 
 
   @yield('script')
+
+  {{-- sweet alert --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
   {{-- multiple/combo select --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
