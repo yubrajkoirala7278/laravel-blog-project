@@ -109,7 +109,7 @@
     @endif
     @if (session('error'))
         <script>
-            toastify().success({!! json_encode(session('success')) !!});
+            toastify().error({!! json_encode(session('error')) !!});
         </script>
     @endif
 

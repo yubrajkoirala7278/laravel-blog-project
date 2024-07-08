@@ -8,6 +8,7 @@ use App\Http\Requests\ContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,15 @@ class HomeController extends Controller
     public function index()
     {
         // fetch post with category,tags and image relation
-        $posts = Post::latest()->with(['category', 'tags', 'image'])->paginate(10);
+        $posts = Post::latest()->with(['category', 'tags', 'image'])->where('status',true)->paginate(10);
 
         // fetch categories with counts
-        $categories = Category::latest()->withCount('posts')->get();
+        // $categories = Category::latest()->where('status',true)->withCount('posts')->get();
+        $categories = Category::latest()
+                      ->withCount(['posts' => function (Builder $query) {
+                          $query->where('status', true);
+                      }])
+                      ->get();
 
         //    fetch all tags with counts
         $tags = Tag::latest()->withCount('posts')->get();

@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category){
-        $posts = Post::with('category')->where('category_id', $category->id)->latest()->paginate(2);
-         //    fetch all tags
-         $tags = Tag::latest()->with('posts')->get();
-        return view('frontend.category.index',compact('posts','tags','category'));
+    public function index(Category $category)
+    {
+        $posts = Post::latest()->with('category')->where('category_id', $category->id)->where('status', true)->latest()->paginate(10);
+        //    fetch all tags
+        $tags = Tag::latest()->with('posts')->get();
+        return view('frontend.category.index', compact('posts', 'tags', 'category'));
     }
 }

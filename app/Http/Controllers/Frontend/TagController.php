@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function index(Tag $tag){
         // fetch posts with selected tag
-        $posts = Post::with('tags')->whereHas('tags',function ($query) use ($tag){
+        $posts = Post::latest()->with('tags')->where('status',true)->whereHas('tags',function ($query) use ($tag){
             $query->whereIn('tag_id',$tag);
         })->paginate(10);
 
