@@ -49,7 +49,3 @@ Login
 </div>
 @endsection
 
-
-
-@section('script')
-@endsection

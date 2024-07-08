@@ -32,7 +32,7 @@
                                             </li>
                                         </ul>
                                         <h2 class="h1">{{ $post->title }}</h2>
-                                        <p class="card-text">{{ $post->description }}</p>
+                                        <p class="card-text">{!! $post->description !!}</p>
                                     </div>
                                 </article>
                             </div>
@@ -66,7 +66,7 @@
                                                 </li>
                                             </ul>
                                             <h2><a class="post-title" href="{{route('frontend.read-more',$post->id)}}">{{ $post->title }}</a></h2>
-                                            <p class="card-text">{{ Str::limit($post->description, 200) }}</p>
+                                            <p class="card-text">{!! Str::limit($post->description, 200) !!}</p>
                                             <div class="content"> <a class="read-more-btn"
                                                     href="{{ route('frontend.read-more', $post->id) }}">Read
                                                     Full

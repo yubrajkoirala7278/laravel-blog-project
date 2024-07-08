@@ -51,7 +51,3 @@ Reset Password
 </div>
 @endsection
 
-
-
-@section('script')
-@endsection

@@ -13,6 +13,9 @@ Route::get('/',[HomeController::class,'index'])->name('frontend.index');
 Route::get('/read-more/{post}',[ReadmoreController::class,'index'])->name('frontend.read-more');
 Route::get('/category/{category}',[CategoryController::class,'index'])->name('frontend.category');
 Route::get('/tag/{tag}',[TagController::class,'index'])->name('frontend.tag');
+Route::get('/about-author',[HomeController::class,'aboutAuthor'])->name('frontend.about.author');
+Route::get('/contact-us',[HomeController::class,'contactUs'])->name('frontend.contact');
+Route::post('/contact-us',[HomeController::class,'contact'])->name('frontent.contact.us');
 
 
 // ============admin dashboard============

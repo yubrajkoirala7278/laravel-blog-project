@@ -15,11 +15,11 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
        // Delete the specified record if it exists
-       User::where('email', 'yubrajkoirala7278@gmail.com')->delete();
+       User::where('email', 'adhikarimahesh2053@gmail.com')->delete();
        // add super admin 
        User::create([
-        'name'=>'Super_Admin',
-        'email'=>'yubrajkoirala7278@gmail.com',
+        'name'=>'महेश अधिकारी बर्बरीक',
+        'email'=>'adhikarimahesh2053@gmail.com',
         'password'=>Hash::make('123456'),
         'is_admin'=>1
        ]);

@@ -25,7 +25,7 @@
                         <tr>
                             <th>{{ $key + 1 }}</th>
                             <td>{{ Str::limit($post->title, 15) }}</td>
-                            <td>{{ Str::limit($post->description, 15) }}</td>
+                            <td>{!! Str::limit($post->description, 15) !!}</td>
                             <td>{{ !empty($post->category) ? $post->category->category : '' }}</td>
                             <td>{{ $post->user->name }}</td>
                             <td>{{ $post->status == 1 ? 'Active' : 'Inactive' }}</td>
@@ -61,6 +61,4 @@
     </div>
 @endsection
 
-@section('script')
 
-@endsection

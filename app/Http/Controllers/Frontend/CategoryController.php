@@ -14,6 +14,6 @@ class CategoryController extends Controller
         $posts = Post::with('category')->where('category_id', $category->id)->latest()->paginate(2);
          //    fetch all tags
          $tags = Tag::latest()->with('posts')->get();
-        return view('frontend.category.index',compact('posts','category','tag'));
+        return view('frontend.category.index',compact('posts','tags','category'));
     }
 }

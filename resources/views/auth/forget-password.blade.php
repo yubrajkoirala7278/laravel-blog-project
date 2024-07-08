@@ -31,6 +31,3 @@ Forget Password
 @endsection
 
 
-
-@section('script')
-@endsection

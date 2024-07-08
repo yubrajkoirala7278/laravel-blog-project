@@ -34,7 +34,7 @@
         <a class="btn" href="{{route('index')}}">Back to home</a>
         <img src="{{asset('admin/assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
         <div class="credits">
-          Designed by <a href="#">Yubraj Koirala</a>
+          Designed by <a href="#">महेश अधिकारी बर्बरीक</a>
         </div>
       </section>
 

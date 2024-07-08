@@ -15,9 +15,9 @@
                 @endif
             </div>
             {{-- description --}}
-            <div class="mb-3">
+            <div class="form-group mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" placeholder="Description" id="description" name="description"></textarea>
+                <textarea class="form-control" id="blog-content" placeholder="Enter the Description" rows="5" name="description"></textarea>
                 @if ($errors->has('description'))
                     <span class="text-danger text-sm">{{ $errors->first('description') }}</span>
                 @endif
@@ -54,10 +54,10 @@
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control" name="image">
                 @if ($errors->has('image'))
-                    <span class="text-danger">{{$errors->first('image')}}</span>
+                    <span class="text-danger">{{ $errors->first('image') }}</span>
                 @endif
-                
-              </div>
+
+            </div>
             {{-- Tags (dynamic multiple select) --}}
             <div class="mb-3">
                 <label for="tags" class="form-label">Tags</label>
@@ -77,10 +77,10 @@
     </div>
 @endsection
 
-@section('script')
-    {{-- multiple select fields --}}
+@push('script')
     <script>
         $(document).ready(function() {
+            // multiple select fields
             $('#select-tags').select2({
                 theme: "bootstrap-5", // Use "bs5" for Bootstrap 5
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
@@ -89,6 +89,21 @@
                 closeOnSelect: false,
                 tags: true
             });
+            //  ck editor
+            ClassicEditor
+                .create(document.querySelector('#blog-content'), {
+                    removePlugins: ['Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload',
+                        'Indent', 'ImageUpload', 'MediaEmbed'
+                    ],
+                })
+                // .then(editor => {
+                //     console.log('Available plugins:', ClassicEditor.builtinPlugins.map(plugin => plugin
+                //         .pluginName));
+                // })
+                .catch(error => {
+                    console.error(error.stack);
+                });
+
         });
     </script>
-@endsection
+@endpush
