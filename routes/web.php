@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ReadmoreController;
+use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Frontend\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,9 @@ Route::get('/tag/{tag}',[TagController::class,'index'])->name('frontend.tag');
 Route::get('/about-author',[HomeController::class,'aboutAuthor'])->name('frontend.about.author');
 Route::get('/contact-us',[HomeController::class,'contactUs'])->name('frontend.contact');
 Route::post('/contact-us',[HomeController::class,'contact'])->name('frontent.contact.us');
+Route::get('/register',[RegisterController::class,'index']);
+Route::post('/register',[RegisterController::class,'register'])->name('frontend.register');
+Route::post('/comment',[CommentController::class,'store'])->name('frontend.comment');
 
 
 // ============admin dashboard============

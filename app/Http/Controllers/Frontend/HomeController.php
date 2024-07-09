@@ -16,42 +16,52 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // fetch post with category,tags and image relation
-        $posts = Post::latest()->with(['category', 'tags', 'image'])->where('status',true)->paginate(10);
+        //=====fetch post with category,tags and image relation======
+        $posts = Post::latest()->with(['category', 'tags', 'image'])->where('status', true)->paginate(10);
 
-        // fetch categories with counts
-        // $categories = Category::latest()->where('status',true)->withCount('posts')->get();
+        //========fetch categories with counts======
+        // $categories = Category::latest()->withCount('posts')->get();
         $categories = Category::latest()
-                      ->withCount(['posts' => function (Builder $query) {
-                          $query->where('status', true);
-                      }])
-                      ->get();
+            ->withCount(['posts' => function (Builder $query) {
+                $query->where('status', true);
+            }])
+            ->get();
 
-        //    fetch all tags with counts
-        $tags = Tag::latest()->withCount('posts')->get();
+
+
+        //=======fetch all tags with counts=========
+        // $tags = Tag::latest()->withCount('posts')->get();
+        $tags = Tag::latest()
+            ->withCount(['posts' => function (Builder $query) {
+                $query->where('status', true);
+            }])
+            ->get();
 
         return view('frontend.home.index', compact('posts', 'tags', 'categories'));
     }
 
-    public function aboutAuthor(){
+    public function aboutAuthor()
+    {
         $tags = Tag::latest()->withCount('posts')->get();
         $categories = Category::latest()->withCount('posts')->get();
-        return view('frontend.about_author.index',compact('tags','categories'));
+        return view('frontend.about_author.index', compact('tags', 'categories'));
     }
 
-    public function contactUs(){
+    public function contactUs()
+    {
         //    fetch all tags with counts
         $tags = Tag::latest()->withCount('posts')->get();
-       return view('frontend.contact_us.index',compact('tags'));
+        return view('frontend.contact_us.index', compact('tags'));
     }
 
-    public function contact(ContactRequest $request){
-        try{
-            $contact=Contact::create($request->validated());
+    public function contact(ContactRequest $request)
+    {
+        try {
+            $contact = Contact::create($request->validated());
             event(new ContactFormSubmitted($contact));
-            return back()->with('success','Thank you for the message!');
-        }catch(\Throwable $th){
-            return back()->with('error',$th->getMessage());
+            return back()->with('success', 'Thank you for the message!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
         }
     }
 }

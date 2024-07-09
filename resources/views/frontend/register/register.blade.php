@@ -1,18 +1,25 @@
 @extends('auth.layouts.master')
 
 @section('title')
-Login
+Register
 @endsection
 
 @section('content')
 <div class="card-body">
     <div class="pt-4 pb-2">
-        <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-        <p class="text-center small">Enter your name & password to login</p>
+        <h5 class="card-title text-center pb-0 fs-4">Create a new account</h5>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate method="POST" action="{{route('admin.login')}}">
+    <form class="row g-3 needs-validation" novalidate method="POST" action="{{route('frontend.register')}}">
         @csrf
+        {{-- name --}}
+        <div class="col-12">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{old('name')}}">
+            @if ($errors->has('name'))
+            <span class="text-danger">{{$errors->first('name')}}</span>
+            @endif
+        </div>
         {{-- email --}}
         <div class="col-12">
             <label for="email" class="form-label">Email</label>
@@ -36,16 +43,12 @@ Login
             @endif
         </div>
 
-        {{-- reset forget password --}}
         <div class="col-12">
-            <p class="small mb-0"><a href="/forget-password">Forget Password?</a></p>
-        </div>
-        <div class="col-12">
-            <p class="small mb-0">Don't have an account?<a href="/register" class="ms-2">Create a new account</a></p>
+            <p class="small mb-0"><a href="/login">Already have an account?</a></p>
         </div>
 
         <div class="col-12">
-            <button class="btn btn-primary w-100" type="submit">Login</button>
+            <button class="btn btn-primary w-100" type="submit">Register</button>
         </div>
     </form>
 

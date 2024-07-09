@@ -28,5 +28,8 @@ class Post extends Model
         return $this->morphOne(Image::class,'model');
     }
 
-    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

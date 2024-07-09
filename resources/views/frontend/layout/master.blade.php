@@ -12,6 +12,8 @@
 
     <!-- theme meta -->
     <meta name="theme-name" content="reporter" />
+    {{-- bootstrap --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- # Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,9 +45,16 @@
                         data-toggle="collapse" data-target="#navigation"> <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
+                @if (Auth::user())
+                <div class="navbar-actions order-3 ml-0 ml-md-4">
+                    <a href="{{ route('logout') }}" class="btn btn-success">Logout</a>
+                </div>
+                @else
                 <div class="navbar-actions order-3 ml-0 ml-md-4">
                     <a href="{{ route('admin.login') }}" class="btn btn-success">Login</a>
                 </div>
+                @endif
+               
                 <div class="collapse navbar-collapse text-center order-lg-2 order-4" id="navigation">
                     <ul class="navbar-nav mx-auto mt-3 mt-lg-0">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('frontend.about.author') }}">About
@@ -89,7 +98,7 @@
             </div>
         </div>
         <div class="copyright bg-dark content">Designed &amp; Developed By <a
-                href="https://www.facebook.com/yubraj.022" target="_blank">Yubraj Koirala</a></div>
+                href="https://www.linkedin.com/in/yubraj-koirala-13a3b02aa/" target="_blank">Yubraj Koirala</a></div>
     </footer>
 
 

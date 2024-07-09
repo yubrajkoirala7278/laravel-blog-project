@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('favicon.png')}}" rel="icon">
-  <link href="{{asset('favicon.png')}}" rel="apple-touch-icon">
+  <link href="{{asset('frontend/images/favicon.png')}}" rel="icon">
+  <link href="{{asset('frontend/images/favicon.png')}}" rel="apple-touch-icon">
 
   {{-- csrf token --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -58,7 +58,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{route('admin.dashboard')}}" class="logo d-flex align-items-center">
-        <img src="{{asset('favicon.png')}}" alt="">
+        <img src="{{asset('frontend/images/favicon.png')}}" alt="" style="height: 50px">
         <span class="d-none d-lg-block fs-5">Blogs</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>

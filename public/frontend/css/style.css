@@ -12,6 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   color: #333;
+  overflow-x: hidden !important;
 }
 
 p {
