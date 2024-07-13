@@ -4,11 +4,11 @@
     <main>
         <section class="section">
             <div class="container">
-                <div class="row no-gutters-lg">
-                    <div class="col-12">
+                <div class="row no-gutters-lg d-flex">
+                    <div class="col-12 order-1">
                         <h2 class="section-title">Latest Articles</h2>
                     </div>
-                    <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="col-lg-8 mb-5 mb-lg-0 order-3 order-lg-2">
                         <div class="row table-data">
                             <div class="col-12 mb-4">
                                 @if ($posts->count() > 0)
@@ -92,7 +92,7 @@
                             {{ $posts->links() }}
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 order-2 order-lg-3">
                         <div class="widget-blocks">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -106,36 +106,47 @@
                                                 बर्बरीक एक प्रतिष्ठित लेखक तथा राजनीतिक रिपोर्टर हुन्। उत्कृष्ट लेखन र
                                                 गहिरो विश्लेषण क्षमताका धनी उहाँले आफ्नो करियरको सुरुवात समाचारपत्र लेखनबाटै
                                                 गर्नुभएको थियो। लामो समयदेखि राजनीतिक रिपोर्टिङमा ख्याति कमाउनुभएका उहाँले
-                                                यस क्षेत्रमा आफ्नो विशेष पहिचान बनाउनुभएको छ।</p> <a href="{{route('frontend.about.author')}}"
+                                                यस क्षेत्रमा आफ्नो विशेष पहिचान बनाउनुभएको छ।</p> <a
+                                                href="{{ route('frontend.about.author') }}"
                                                 class="btn btn-sm btn-outline-primary">Know
                                                 More</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-6">
+                                <div class="col-lg-12 col-md-6 d-none d-lg-block">
                                     <div class="widget">
                                         <h2 class="section-title mb-3">Categories</h2>
                                         <div class="widget-body">
                                             <ul class="widget-list">
-                                                @foreach ($categories as $category)
-                                                    <li><a href="{{ route('frontend.category', $category->id) }}">{{ $category->category }}<span
-                                                                class="ml-auto">({{ $category->posts_count }})</span></a>
-                                                    </li>
-                                                @endforeach
+                                                @if (count($categories) > 0)
+                                                    @foreach ($categories as $category)
+                                                        <li><a href="{{ route('frontend.category', $category->id) }}">{{ $category->category }}<span
+                                                                    class="ml-auto">({{ $category->posts_count }})</span></a>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li>No Categories to display...</li>
+                                                @endif
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-6">
+                                <div class="col-lg-12 col-md-6 d-none d-lg-block">
                                     <div class="widget">
                                         <h2 class="section-title mb-3">Tags</h2>
                                         <div class="widget-body">
                                             <ul class="widget-list">
-                                                @foreach ($tags as $tag)
-                                                    <li><a href="{{ route('frontend.tag', $tag) }}">{{ $tag->tag }}<span
-                                                                class="ml-auto">({{ $tag->posts_count }})</span></a>
-                                                    </li>
-                                                @endforeach
+                                                @if (count($tags) > 0)
+                                                    @foreach ($tags as $tag)
+                                                        <li><a href="{{ route('frontend.tag', $tag) }}">{{ $tag->tag }}<span
+                                                                    class="ml-auto">({{ $tag->posts_count }})</span></a>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li>No tags to display...</li>
+                                                @endif
+
                                             </ul>
                                         </div>
                                     </div>

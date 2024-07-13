@@ -20,7 +20,11 @@ Route::get('/contact-us',[HomeController::class,'contactUs'])->name('frontend.co
 Route::post('/contact-us',[HomeController::class,'contact'])->name('frontent.contact.us');
 Route::get('/register',[RegisterController::class,'index']);
 Route::post('/register',[RegisterController::class,'register'])->name('frontend.register');
-Route::post('/comment',[CommentController::class,'store'])->name('frontend.comment');
+Route::post('/comment',[CommentController::class,'store'])->name('comments.store');
+Route::post('/comments/{comment}/reply', [CommentController::class, 'reply'])->name('comments.reply');
+Route::delete('/comment/delete/{id}',[CommentController::class,'delete'])->name('comment.delete');
+Route::delete('/comment/delete/reply/{id}/{commentId}',[CommentController::class,'deleteReply'])->name('comment.delete.reply');
+
 
 
 // ============admin dashboard============

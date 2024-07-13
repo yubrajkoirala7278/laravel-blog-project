@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 
@@ -13,12 +12,13 @@ class ReadmoreController extends Controller
     {
         try {
             $post = Post::with(['comments' => function ($query) {
-                $query->orderBy('created_at', 'desc');
+                $query->orderBy('created_at', 'desc')->with(['replies.user']);
             }, 'comments.user'])
             ->withCount('comments')
             ->where('id', $post->id)
             ->where('status', true)
             ->first();
+            
             if (!isset($post)) {
                 return back()->with('error', 'No post to display!');
             }

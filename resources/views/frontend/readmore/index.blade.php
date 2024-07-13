@@ -15,7 +15,7 @@
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase">{{ $post->created_at->format('d
-                                                                                            M Y') }}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            M Y') }}</span>
                                             <span
                                                 class="text-uppercase">{{ round(Str::of($post->description)->wordCount() / 238, 2) }}
                                                 minutes read</span>
@@ -35,46 +35,85 @@
                                         <h2 class="h1">{{ $post->title }}</h2>
                                         <p class="card-text">{!! $post->description !!}</p>
                                         <div>
-                                            <form action="{{ route('frontend.comment') }}" method="POSt">
+                                            <!-- Form to add a new comment -->
+                                            <form action="{{ route('comments.store') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                                <label for="comment" class="fs-4 text-success fw-semibold">Comment</label>
-                                                <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="comment"></textarea>
-                                                @error('comment')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                                <button type="submit"
-                                                    class="btn btn-success ms-auto d-block mt-3">Comment</button>
+                                                <textarea name="comment" class="form-control" placeholder="Leave a comment here"></textarea>
+                                                <button type="submit" class="btn btn-success ms-auto d-block mt-3">
+                                                    Comment</button>
                                             </form>
-                                            @if ($post->comments->count() > 0)
-                                            <h2 class="fs-5 fw-semibold">{{ $post->comments->count() }} Comments</h2>
+                                            <!-- Display comments and replies -->
+                                            @if ($post && $post->comments->count() > 0)
+                                                <h2 class="fs-5 fw-semibold">{{ $post->comments_count }} Comments</h2>
                                                 <div style="max-height: 250px;overflow-y:scroll">
                                                     @foreach ($post->comments as $comment)
-                                                        <div >
-                                                            <div class="py-2 px-3 text-start fs-6 mb-3 w-100" style="background-color: #F8F9FA">
-                                                                <p class="fw-semibold mb-0">{{$comment->user->name}} <span class="text-sm fst-italic fw-lighter" >({{ $comment->created_at->format('F j, Y') }})</span></p>
+                                                        <div>
+                                                            <div class="py-2 px-3 text-start fs-6 mb-3 w-100"
+                                                                style="background-color: #F8F9FA">
+                                                                <p class="fw-semibold mb-0 mark">{{ $comment->user->name }}
+                                                                    <span
+                                                                        class="text-sm fst-italic fw-lighter">({{ $comment->created_at->format('F j, Y') }})</span>
+                                                                </p>
                                                                 <p class="fw-normal mb-0">{{ $comment->comment }}</p>
-                                                            </div>
+                                                                <form action="{{ route('comment.delete', $comment->id) }}"
+                                                                    method="POST" class="p-0 mt-0">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-transparent text-danger border-0 btn-sm p-0"
+                                                                        onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
+                                                                </form>
+                                                                <p class="fw-normal mb-0 text-success text-end reply-btn position-relative"
+                                                                    style="cursor: pointer;z-index:2"
+                                                                    data-comment-id="{{ $comment->id }}">Reply</p>
+                                                                <form action="{{ route('comments.reply', $comment) }}"
+                                                                    method="POST" class="reply-form"
+                                                                    data-comment-id="{{ $comment->id }}"
+                                                                    style="display: none;">
+                                                                    @csrf
+                                                                    <textarea name="comment" class="form-control" placeholder="Leave a comment here"></textarea>
+                                                                    <button type="submit"
+                                                                        class="btn btn-success ms-auto d-block mt-3">Reply</button>
+                                                                </form>
 
-                                                            {{-- <form action="">
-                                                                <label for="comment">Reply</label>
-                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                                                <button type="submit"
-                                                                    class="btn btn-success ms-auto d-block mt-3">Reply</button>
-                                                            </form> --}}
+                                                                <!-- Display Replies -->
+                                                                @if ($comment->replies->count() > 0)
+                                                                    <div style="position: relative;top:-20px">
+                                                                        @foreach ($comment->replies as $reply)
+                                                                            <div class="ps-3">
+                                                                                <p class="fw-semibold mb-0">Reply <i
+                                                                                        class="fa-solid fa-reply"></i></p>
+                                                                                <div class="ps-3">
+                                                                                    <p class="fw-semibold mb-0 highlight">
+                                                                                        {{ $reply->user->name }} <span
+                                                                                            class="text-sm fst-italic fw-lighter">({{ $reply->created_at->format('F j, Y') }})</span>
+                                                                                    </p>
+                                                                                    <p class="fw-normal mb-0">
+                                                                                        {{ $reply->comment }}</p>
+                                                                                    <form
+                                                                                       action="{{ route('comment.delete.reply', ['id' => $reply->id, 'commentId' => $reply->comment_id]) }}"
+                                                                                        method="POST" class="p-0 mt-0">
+                                                                                        @csrf
+                                                                                        @method('DELETE')
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-transparent text-danger border-0 btn-sm p-0"
+                                                                                            onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     @endforeach
-                                                    
                                                 </div>
-                                                
                                             @endif
-
 
                                         </div>
                                     </div>
-
                                 </article>
-
                             </div>
                             {{-- recommended --}}
                             <div class="col-12">
@@ -127,3 +166,34 @@
         </section>
     </main>
 @endsection
+
+@push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const replyButtons = document.querySelectorAll('.reply-btn');
+
+            replyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentId = this.getAttribute('data-comment-id');
+                    const replyForm = document.querySelector(
+                        `.reply-form[data-comment-id='${commentId}']`);
+
+                    if (replyForm.style.display === 'block') {
+                        replyForm.style.display = 'none';
+                        this.textContent = 'Reply';
+                    } else {
+                        document.querySelectorAll('.reply-form').forEach(form => {
+                            form.style.display = 'none';
+                        });
+                        document.querySelectorAll('.reply-btn').forEach(btn => {
+                            btn.textContent = 'Reply';
+                        });
+
+                        replyForm.style.display = 'block';
+                        this.textContent = 'Hide';
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

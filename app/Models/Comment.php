@@ -9,10 +9,15 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable=['post_id','user_id','comment'];
+    protected $fillable=['post_id','user_id','comment','comment_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'comment_id')->orderBy('created_at', 'desc');
     }
 }
